@@ -1,26 +1,44 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import StarRatings from 'react-star-ratings';
 
 import { device } from '../../styles/media';
 import Offer from "./Offer";
 
 const ProductContainer = styled.div`
-    width: 86%;
-    height: 520px;
-    margin: 0 0 1em 1em;
-    border: 1px solid #bababa;
-    
-    @media ${device.mobileS} {
-        width: 71%;
+    margin-right: 0.5em;
+    cursor: pointer;
+    @media (min-width: 320px) and (max-width: 480px) {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
-    @media ${device.mobileM} {
-        width: 71%;
+    @media (min-width: 768px) {
+        width: 80%;
+        max-height: 500px;
+        margin-right: 0.5em;
+        display: flex;
+        flex-direction: row;
     }
 
-    @media ${device.mobileL} {
-        width: 71%;
+    @media (min-width: 1024px) {
+        width: 100%;
+        max-height: 500px;
+        margin-right: 1em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    :hover {
+        background-color: #F4F4F4;
+    }
+
+    :active {
+        background-color: #F4F4F4;
     }
 `;
 
@@ -41,12 +59,31 @@ const DescriptionContainer = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-left: 0.5em;
 `;
 
 const Button = styled.button`
     margin-bottom: 1em;
     margin-left: 15%;
     padding: 0.5em 2em;
+`;
+
+const Title = styled.h4`
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.2em;
+    margin: 0.3em 0;
+`;
+
+const Featured = styled.div`
+    font-family: Arial, sans-serif;
+    background-color: #EE9F72;
+    width: 100px;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 2px;
+    margin: 0.5em auto;
+    font-size: 0.8em;
 `;
 
 const Vegan = styled.span`
@@ -73,14 +110,40 @@ const AddToBasket = styled.button`
         margin-right: 6em; 
     }
 `;
+
+const Image = styled.img`
+    @media (min-width: 320px) and (max-width: 480px) {
+        height: 150px;
+        width: 105px;
+        margin-top: 1em;
+    }
+    @media screen and (device-aspect-ratio: 40/71) {
+        height: 100px;
+        width: 70px;
+        margin-top: 1em;
+    }
+`;
+
+const Rating = styled.div`
+    margin-top: 1em;
+`
 export default class Product extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            rating: 0
+        }
+    }
     handleProductClick = id => {
         this.props.onProductClick(id);
     }
 
-    handleAddToBasketClick = id => {
-        this.props.onAddToBasketClick(id);
-    }
+    changeRating = ( newRating, name ) => {
+        this.setState({
+          rating: this.props.rating
+        });
+      }
 
     render() {
         const {
@@ -93,22 +156,34 @@ export default class Product extends Component {
             isFeatured,
             isVegan,
             newPrice
-          } = this.props;
-          return (
-            <ProductContainer onClick={this.handleProductClick}>
-              <img src={image} alt={title} />
-              <DescriptionContainer>
-                <p>{title}</p>
-                {isFeatured && <div>Featured product</div> }
-                {isOffer && <Offer />}
-                {isOffer && newPrice !== '' && <div><NewPrice>£{newPrice.toFixed(2)}</NewPrice><PreviousPrice>£{price.toFixed(2)}</PreviousPrice></div>}
-                {!isOffer && <span>Price £{price.toFixed(2)}</span>}
-                <p>Rating: {rating}</p>
-                <p>{isVegan && <Vegan>V</Vegan>}</p>
-              </DescriptionContainer>
-              <AddToBasket onClick={this.handleAddToBasketClick}>Add to basket</AddToBasket>
-            </ProductContainer>
-          );
+        } = this.props;
+        return (
+            <div>
+                <ProductContainer onClick={this.handleProductClick}>
+                    <div>
+                        <Image src={image} alt={title} />
+                    </div>
+                    <DescriptionContainer>
+                        <Title>{title}</Title>
+                        {isFeatured && <Featured>Featured product</Featured>}
+                        {isOffer && <Offer />}
+                        {isOffer && newPrice !== '' && <div><NewPrice>£{newPrice.toFixed(2)}</NewPrice><PreviousPrice>£{price.toFixed(2)}</PreviousPrice></div>}
+                        {!isOffer && <span>Price £{price.toFixed(2)}</span>}
+                        <Rating>
+                            <StarRatings
+                                rating={this.props.rating}
+                                starRatedColor="orange"
+                                changeRating={this.changeRating}
+                                numberOfStars={5}
+                                name='Rating'
+                                starDimension="25px"
+                            />
+                        </Rating>
+                        <p>{isVegan && <Vegan>V</Vegan>}</p>
+                    </DescriptionContainer>
+                </ProductContainer>
+            </div>
+        );
     }
 }
 
@@ -135,5 +210,5 @@ Product.defaultProps = {
     isFeatured: false,
     isVegan: false,
     newPrice: 0,
-    onProductClick: () => {}
+    onProductClick: () => { }
 }

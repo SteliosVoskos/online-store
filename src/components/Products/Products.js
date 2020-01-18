@@ -12,9 +12,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-
     margin: 2em 0 0 0;
-    overflow-x: hidden;
 
     @media ${device.mobileS} {
         display: flex;
@@ -57,10 +55,6 @@ export default class Products extends Component {
         this.props.viewProduct(id);
     }
 
-    handleAddProductToBasketClick = id => {
-        this.props.addToBasket(id);
-    }
-
     renderProductList() {
         const { productList } = this.props;
         if (!productList || !productList.length) {
@@ -73,8 +67,8 @@ export default class Products extends Component {
                         <Product
                             key={product.id}
                             onProductClick={() => this.handleProductClick(product.id)}
-                            onAddToBasketClick={() => this.handleAddProductToBasketClick(product.id)}
-                            {...product}/>
+                            {...product}
+                        />
                     </StyledLink>
                 </div>
             )

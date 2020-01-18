@@ -13,7 +13,6 @@ import Navigation from './components/Navigation/Navigation';
 import store from './store';
 
 const Wrapper = styled.div`
-  overflow-x: hidden;
 `;
 
 function App() {

@@ -60,6 +60,16 @@ const Button = styled.button`
 const PassowrdStrength = styled.span`
     margin-left: 1em;
     color: ${props => props.passwordStrength === 'Weak' ? 'red' : 'green'};
+`;
+
+const SigninPrompt = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const SigninLink = styled(Link)`
+    display: block;
+    margin: 1em 0 0 0.4em;
 `
 
 export default class Register extends Component {
@@ -142,6 +152,9 @@ export default class Register extends Component {
                 <div>
                     <Button onClick={this.handleFormSubmission}>Register</Button>
                 </div>
+                <SigninPrompt>
+                    <p>Already have an account?</p><SigninLink to="/login">Sign-in</SigninLink>
+                </SigninPrompt>
             </InputContainer>
         );
     }

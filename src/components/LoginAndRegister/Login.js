@@ -57,6 +57,16 @@ const Button = styled.button`
     }
 `;
 
+const SignUpPrompt = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const SignUpLink = styled(Link)`
+    display: block;
+    margin: 1em 0 0 0.4em;
+`
+
 export default class Login extends Component {
     handleEmailChange = event => {
         this.props.loginEmailIsUpdating(event.target.value);
@@ -69,9 +79,24 @@ export default class Login extends Component {
     handleSubmission = () => {
         this.props.submitLoginForm();
     }
+
+    renderErrorMessage() {
+        if (this.props.loginFormSubmitted && (this.props.loginEmail !== this.props.email)) {
+            return (
+                <div>
+                    <p>The provide login email does not exist. Why not <Link to="/register">Sign-up</Link></p>
+                </div>
+            );
+        } else if (this.props.loginFormSubmitted && (this.props.loginPassword !== this.props.password)) {
+            return <p>Invalid password</p>;
+        } else {
+            return <div />;
+        }
+    }
     
     render() {
-        if (this.props.loginFormSubmitted && (this.props.loginEmail === this.props.email) && (this.props.loginPassword === this.props.password)) {
+        const { email, loginEmail, loginFormSubmitted, loginPassword, password  } = this.props;
+        if (loginFormSubmitted && (loginEmail === email) && (loginPassword === password)) {
             return (
                 <div>
                     <p>Welcome back {this.props.name}. Happy shopping</p>
@@ -81,10 +106,13 @@ export default class Login extends Component {
         }
         return (
             <InputContainer>
-                <Input type="text" placeholder="Email" onChange={this.handleEmailChange} value={this.props.loginEmail} />
-                <Input type="text" placeholder="Password" onChange={this.handlePasswordChange} value={this.props.loginPassword} />
-                
+                <Input type="text" placeholder="Email" onChange={this.handleEmailChange} value={loginEmail} />
+                <Input type="text" placeholder="Password" onChange={this.handlePasswordChange} value={loginPassword} />
+                {this.renderErrorMessage()}
                 <Button onClick={this.handleSubmission}>Login</Button>
+                <SignUpPrompt>
+                    <p>Not having an account?</p><SignUpLink to="/register">Sign-up</SignUpLink>
+                </SignUpPrompt>
             </InputContainer>
         );
     }

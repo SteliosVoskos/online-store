@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { device } from '../../styles/media'
 
@@ -34,24 +33,49 @@ const ProductInformation = styled.div`
     align-items: center;
 `;
 
-
-const ProductDetails = ({ selectedProduct }) => {
-    if (selectedProduct !== null) {
-        return (
-            <Container>
-                <Heading>Information about {selectedProduct.title}</Heading>
-                <ProductInformation>
-                    <img src={selectedProduct.image} />
-                    <h2>{selectedProduct.title}</h2>
-                    <p>{selectedProduct.description}</p>
-                    <p>Rating {selectedProduct.rating}</p>
-                    <p>Price: £{selectedProduct.price.toFixed(2)}</p>
-                </ProductInformation>
-            </Container>
-        )
+const AddToBasket = styled.button`
+    padding: 0.5em 2em;
+    background-color: #3e647d;
+    width: 200px;
+    color: white;
+    font-size: 1em;
+    color: #f2f2f2;
+    margin: 0.5em 1.5em 0.5em 0.5em;
+    cursor: pointer;
+    text-align: center;
+    border: transparent;
+    :hover {
+        background-color: #49728c;
     }
 
-    return null;
-}
+    @media ${device.mobileS} {
+        margin-right: 6em; 
+    }
+`;
 
-export default ProductDetails;
+export default class ProductDetails extends Component {
+    handleAddToBasket = () => {
+        this.props.addToBasket(this.props.selectedProduct);
+    }
+
+    render() {
+        const { selectedProduct } = this.props;
+        if (selectedProduct !== null) {
+            return (
+                <Container>
+                    <Heading>Information about {selectedProduct.title}</Heading>
+                    <ProductInformation>
+                        <img src={selectedProduct.image} />
+                        <h2>{selectedProduct.title}</h2>
+                        <p>{selectedProduct.description}</p>
+                        <p>Rating {selectedProduct.rating}</p>
+                        <p>Price: £{selectedProduct.price.toFixed(2)}</p>
+                    </ProductInformation>
+                    <AddToBasket onClick={this.handleAddToBasket}>Add to basket</AddToBasket>
+                </Container>
+            )
+        }
+    
+        return null;
+    }
+}

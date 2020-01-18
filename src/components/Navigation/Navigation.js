@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import NavigationItem from './NavigationItem';
 import routes from './RouteConfigs';
-import { device } from '../../styles/media';
 
 const MobileNavigationContainer = styled.div`
     display: flex;
@@ -46,7 +45,13 @@ export default class Navigation extends Component {
         });
     }
 
-    
+    handleLinkClick = () => {
+        this.setState({
+            isBurgerMenuClicked: !this.state.isBurgerMenuClicked
+        });
+    }
+
+
     render() {
         if (this.isMobileOrTablet()) {
             return (
@@ -54,7 +59,7 @@ export default class Navigation extends Component {
                     <BurgerMenuContainer onClick={this.handleBurgerMenuClick}>
                         <BurgerMenu></BurgerMenu><BurgerMenu></BurgerMenu><BurgerMenu></BurgerMenu>
                     </BurgerMenuContainer>
-                    {this.state.isBurgerMenuClicked && routes.map(route => <NavigationItem key={route.id} {...route} />)}
+                    {this.state.isBurgerMenuClicked && routes.map(route => <NavigationItem key={route.id} onLinkClick={this.handleLinkClick} {...route} />)}
                 </MobileNavigationContainer>
             );
         }

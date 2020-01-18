@@ -175,14 +175,13 @@ const products = (state = initialState, action) => {
                 selectedProduct: state.productList.find(product => product.id === action.id)
             })
         case actionType.ADD_TO_BASKET: {
-            const basketItem = state.productList.find(product => product.id === action.id);
             return Object.assign({}, state, {
-                basket: state.basket.concat(basketItem),
-                totalPrice: state.basket.reduce((a, c) => a + c.price, 0)
+                basket: state.basket.concat(action.item)
             })
         }
+        default:
+            return state;
     }
-    return state;
 }
 
 export default products;

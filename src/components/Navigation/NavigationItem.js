@@ -15,22 +15,28 @@ const StyledLink = styled(NavLink)`
 `;
 
 export default class NavigationItem extends React.Component {
+    handleLinkClick = () => {
+        this.props.onLinkClick();
+    }
+
     render() {
         const {
             path,
             text
         } = this.props;
 
-        return <StyledLink to={path}>{text}</StyledLink>;
+        return <StyledLink onClick={this.handleLinkClick} to={path}>{text}</StyledLink>;
     }
 }
 
 NavigationItem.propTypes = {
+    onLinkClick: PropTypes.func.isRequired,
     path: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired
 };
 
 NavigationItem.defaultProps = {
+    onLinkClick: () => {},
     path: '',
     text: ''
 };

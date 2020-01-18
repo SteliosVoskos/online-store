@@ -25,10 +25,10 @@ export function viewProduct(id) {
     };
 }
 
-export function addToBasket(id) {
+export function addToBasket(item) {
     return {
         type: actionTypes.ADD_TO_BASKET,
-        id
+        item
     }
 }
 

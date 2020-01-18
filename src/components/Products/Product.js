@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { device } from '../../styles/media';
 import Offer from "./Offer";
 
 const ProductContainer = styled.div`
@@ -62,12 +61,6 @@ const DescriptionContainer = styled.div`
     margin-left: 0.5em;
 `;
 
-const Button = styled.button`
-    margin-bottom: 1em;
-    margin-left: 15%;
-    padding: 0.5em 2em;
-`;
-
 const Title = styled.h4`
     font-family: Arial, sans-serif;
     font-weight: 500;
@@ -89,26 +82,6 @@ const Featured = styled.div`
 const Vegan = styled.span`
     font-weight: bold;
     color: green;
-`;
-
-const AddToBasket = styled.button`
-    padding: 0.5em 2em;
-    background-color: #3e647d;
-    width: 200px;
-    color: white;
-    font-size: 1em;
-    color: #f2f2f2;
-    margin: 0.5em 1.5em 0.5em 0.5em;
-    cursor: pointer;
-    text-align: center;
-    border: transparent;
-    :hover {
-        background-color: #49728c;
-    }
-
-    @media ${device.mobileS} {
-        margin-right: 6em; 
-    }
 `;
 
 const Image = styled.img`
@@ -149,13 +122,12 @@ export default class Product extends Component {
         const {
             image,
             title,
-            unit,
             price,
-            rating,
             isOffer,
             isFeatured,
             isVegan,
-            newPrice
+            newPrice,
+            rating
         } = this.props;
         return (
             <div>
@@ -171,7 +143,7 @@ export default class Product extends Component {
                         {!isOffer && <span>Price £{price.toFixed(2)}</span>}
                         <Rating>
                             <StarRatings
-                                rating={this.props.rating}
+                                rating={rating}
                                 starRatedColor="orange"
                                 changeRating={this.changeRating}
                                 numberOfStars={5}

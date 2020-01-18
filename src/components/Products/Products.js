@@ -33,20 +33,12 @@ const Wrapper = styled.div`
     }
 `;
 
-const ProductItem = styled.div`
-    width: 100%;
-`;
-
 const StyledLink = styled(Link) `
     text-decoration: none;
     color: black;
 `;
 
 export default class Products extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.loadProducts();
     }

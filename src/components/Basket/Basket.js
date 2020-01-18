@@ -8,7 +8,7 @@ const BasketItem = styled.div`
     flex-direction: column;
     justify-content: center;
     border: 1px solid grey;
-    padding: 1em;
+    padding: 0.7em;
     margin: 1em 1em;
     width: 20%;
     align-items: center;
@@ -48,16 +48,19 @@ const BasketContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
 `
+const ProductInfo = styled.p`
+    margin: 0.2em 0;
+`
 export default class Basket extends Component {
     renderBasketItems() {
         const { basket } = this.props;
         return basket.map(product => {
             return (
-                <BasketItem>
+                <BasketItem key={product.id}>
                     <img src={product.image} />
-                    <p>{product.title}</p>
-                    <p>{product.description}</p>
-                    <p>£{product.isOffer ? product.newPrice.toFixed(2) : product.price.toFixed(2)}</p>
+                    <ProductInfo>{product.title}</ProductInfo>
+                    <ProductInfo>{product.description}</ProductInfo>
+                    <ProductInfo>£{product.isOffer ? product.newPrice.toFixed(2) : product.price.toFixed(2)}</ProductInfo>
                 </BasketItem>
             )
         })
@@ -70,7 +73,7 @@ export default class Basket extends Component {
 
         return (
             <div>
-                <Heading>Your basket has {basket.length} items</Heading>
+                <Heading>Your basket has {basket.length} {basket.length === 1 ? `item` : `items`}</Heading>
                 <BasketContainer>{this.renderBasketItems()}</BasketContainer>
             </div>
         )

@@ -61,6 +61,19 @@ const EmptyBasket = styled.div`
     background-color: #e4e9ec;
     font-size: 2em;
     font-weight: 500;
+
+    @media (min-width: 320px) and (max-width: 480px) {
+        margin-left: 0;
+        width: 70%;
+        font-size: 1.5em;
+    }
+
+    @media screen and (device-aspect-ratio: 40/71) {
+        margin-left: 0;
+        width: 70%;
+        font-size: 1.3em;
+        padding-left: 2em;
+    }
 `;
 
 const Total = styled.div`
@@ -70,6 +83,9 @@ const Total = styled.div`
     font-size: 1em;
     font-weight: light;
     font-family: sans-serif;
+    @media (min-width: 320px) and (max-width: 480px) {
+        width: 80%;
+    }
 `;
 export default class Basket extends Component {
     renderBasketItems() {

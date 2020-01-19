@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { device } from '../../styles/media'
 
@@ -48,8 +49,8 @@ const AddToBasket = styled.button`
         background-color: #49728c;
     }
 
-    @media ${device.mobileS} {
-        margin-right: 6em; 
+    @media (min-width: 320px) and (max-width: 480px) {
+        align-self: center;
     }
 `;
 
@@ -59,7 +60,7 @@ export default class ProductDetails extends Component {
     }
 
     render() {
-        const { selectedProduct } = this.props;
+        const { selectedProduct, basket } = this.props;
         if (selectedProduct !== null) {
             return (
                 <Container>
@@ -72,6 +73,7 @@ export default class ProductDetails extends Component {
                         <p>Price: £{selectedProduct.price.toFixed(2)}</p>
                     </ProductInformation>
                     <AddToBasket onClick={this.handleAddToBasket}>Add to basket</AddToBasket>
+                    {basket.length > 0 && <div>Your basket has {basket.length} {basket.length === 1 ? `item` : `items`}. <Link to="/basket">Go to your basket</Link></div>}
                 </Container>
             )
         }

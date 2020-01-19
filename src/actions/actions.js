@@ -84,11 +84,11 @@ export function loginPasswordIsUpdating(loginPassword) {
 export function submitLoginForm() {
     return {
         type: actionTypes.LOGIN_FORM_SUBMITTED
-    }
+    };
 }
 
 export function submitRegisterForm() {
     return {
         type: actionTypes.REGISTER_FORM_SUBMITTED
-    }
+    };
 }

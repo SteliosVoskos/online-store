@@ -4,10 +4,8 @@ const initialState = {
     basket: [],
     productList: [],
     selectedProduct: null,
-    totalPrice: 0,
-    totalNumberOfItems: 0
+    totalPrice: 0
 };
-
 
 const products = (state = initialState, action) => {
     switch (action.type) {
@@ -147,7 +145,7 @@ const products = (state = initialState, action) => {
                         isFeatured: false,
                         isOffer: false,
                         price: 2,
-                        newPrice: 9
+                        newPrice: 0
                     },
                     {
                         id: 10,
@@ -175,9 +173,23 @@ const products = (state = initialState, action) => {
                 selectedProduct: state.productList.find(product => product.id === action.id)
             })
         case actionType.ADD_TO_BASKET: {
-            return Object.assign({}, state, {
+            const newState = Object.assign({}, state, {
                 basket: state.basket.concat(action.item)
-            })
+            });
+
+            if (newState.basket.length > 0) {
+                return Object.assign({}, state, {
+                    basket: newState.basket,
+                    totalPrice: newState.basket.reduce((accumulator, current) => {
+                        if (current.isOffer === true) {
+                            return accumulator + current.newPrice;
+                        }
+                        return accumulator + current.price;
+                    }, 0)
+                })
+            }
+
+            return newState;
         }
         default:
             return state;

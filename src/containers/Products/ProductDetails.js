@@ -5,11 +5,11 @@ import ProductDetails from '../../components/Products/ProductDetails';
 import {
     addToBasket
 } from '../../actions/actions'
-const mapStateToProps = ({ products }) => {
-    return {
-        selectedProduct: products.selectedProduct
-    }; 
-};
+
+const mapStateToProps = ({ products }) => ({
+    selectedProduct: products.selectedProduct,
+    basket: products.basket 
+});
 
 const mapDispatchToProps = dispatch => ({
     addToBasket: bindActionCreators(addToBasket, dispatch)

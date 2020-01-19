@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { device } from '../../styles/media';
 
@@ -35,22 +36,41 @@ const BasketItem = styled.div`
 `;
 
 const Heading = styled.h1`
+    display: block;
     color: #999999;
     font-family: arial, sans-serif;
     font-size: 2em;
     font-weight: bold;
-    margin-top: 0px;
-    margin-bottom: 1px;
+    margin-top: 1em;
 `;
 
 const BasketContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-`
+`;
+
 const ProductInfo = styled.p`
     margin: 0.2em 0;
-`
+`;
+
+const EmptyBasket = styled.div`
+    margin: 2em 4em 0.5em 4em;
+    padding: 1em 2em;
+    width: 30%;
+    background-color: #e4e9ec;
+    font-size: 2em;
+    font-weight: 500;
+`;
+
+const Total = styled.div`
+    margin: 2em 4em 0.5em 0;
+    padding: 1em 2em;
+    background-color: #e4e9ec;
+    font-size: 1em;
+    font-weight: light;
+    font-family: sans-serif;
+`;
 export default class Basket extends Component {
     renderBasketItems() {
         const { basket } = this.props;
@@ -62,19 +82,28 @@ export default class Basket extends Component {
                     <ProductInfo>{product.description}</ProductInfo>
                     <ProductInfo>£{product.isOffer ? product.newPrice.toFixed(2) : product.price.toFixed(2)}</ProductInfo>
                 </BasketItem>
-            )
-        })
+            );
+        });
     }
+
     render() {
         const { basket } = this.props;
         if (!basket.length || !basket) {
-            return <p>Your basket is empty</p>;
+            return (
+                <div>
+                    <EmptyBasket>Your basket is empty. See our products <Link to="/products">here</Link></EmptyBasket>
+                </div>
+            );
         }
 
         return (
             <div>
                 <Heading>Your basket has {basket.length} {basket.length === 1 ? `item` : `items`}</Heading>
                 <BasketContainer>{this.renderBasketItems()}</BasketContainer>
+                <hr />
+                <Total>
+                    <h3>Total: £{this.props.totalPrice.toFixed(2)}</h3>
+                </Total>
             </div>
         )
     }

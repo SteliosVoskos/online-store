@@ -87,6 +87,18 @@ const Total = styled.div`
         width: 80%;
     }
 `;
+
+const Button = styled.button`
+    padding: 1em 3em;
+    background-color: #3e647d;
+    color: white;
+    font-size: 1em;
+    color: #f2f2f2;
+    margin: 1em 0 1em 0.5em;
+    :hover {
+        background-color: #49728c;
+    }
+`;
 export default class Basket extends Component {
     renderBasketItems() {
         const { basket } = this.props;
@@ -100,6 +112,10 @@ export default class Basket extends Component {
                 </BasketItem>
             );
         });
+    }
+
+    handleClearbasket = () => {
+        this.props.clearBasket();
     }
 
     render() {
@@ -120,6 +136,7 @@ export default class Basket extends Component {
                 <Total>
                     <h3>Total: £{this.props.totalPrice.toFixed(2)}</h3>
                 </Total>
+                <Button onClick={this.props.clearBasket}>Clear basket</Button>
             </div>
         )
     }

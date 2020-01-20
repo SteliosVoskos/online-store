@@ -92,3 +92,9 @@ export function submitRegisterForm() {
         type: actionTypes.REGISTER_FORM_SUBMITTED
     };
 }
+
+export function clearBasket() {
+    return {
+        type: actionTypes.CLEAR_BASKET
+    };
+}

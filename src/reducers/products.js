@@ -170,6 +170,11 @@ const products = (state = initialState, action) => {
 
             return newState;
         }
+        case action.CLEAR_BASKET:
+            return Object.assign({}, state, {
+                basket: [],
+                totalPrice: 0
+            })
         default:
             return state;
     }

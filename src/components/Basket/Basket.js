@@ -90,16 +90,20 @@ const Total = styled.div`
 
 const Button = styled.button`
     padding: 1em 3em;
-    background-color: #3e647d;
-    color: white;
+    background-color: ${props => props.isRemoveFromBasket ? '#F94F4F' : '#3e647d' };
+    color: ${props => props.isRemoveFromBasket ? 'black' : 'white' };
     font-size: 1em;
     color: #f2f2f2;
     margin: 1em 0 1em 0.5em;
     :hover {
-        background-color: #49728c;
+        background-color: ${props => props.isRemoveFromBasket ? '#FA5252' : '#49728c' };
     }
 `;
 export default class Basket extends Component {
+    handleDeleteBasketItem = id => {
+        this.props.deleteBasketItem(id);
+    }
+
     renderBasketItems() {
         const { basket } = this.props;
         return basket.map(product => {
@@ -109,6 +113,7 @@ export default class Basket extends Component {
                     <ProductInfo>{product.title}</ProductInfo>
                     <ProductInfo>{product.description}</ProductInfo>
                     <ProductInfo>£{product.isOffer ? product.newPrice.toFixed(2) : product.price.toFixed(2)}</ProductInfo>
+                    <Button isRemoveFromBasket={true} onClick={() => this.handleDeleteBasketItem(product.id)}>Remove item</Button>
                 </BasketItem>
             );
         });

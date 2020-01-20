@@ -170,7 +170,11 @@ const products = (state = initialState, action) => {
 
             return newState;
         }
-        case action.CLEAR_BASKET:
+        case actionType.DELETE_BASKET_ITEM:
+            return Object.assign({}, state, {
+                basket: state.basket.filter(product => product.id !== action.id)
+            });
+        case actionType.CLEAR_BASKET:
             return Object.assign({}, state, {
                 basket: [],
                 totalPrice: 0

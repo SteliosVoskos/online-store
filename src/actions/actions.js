@@ -98,3 +98,10 @@ export function clearBasket() {
         type: actionTypes.CLEAR_BASKET
     };
 }
+
+export function deleteBasketItem(id) {
+    return {
+        type: actionTypes.DELETE_BASKET_ITEM,
+        id
+    };
+}

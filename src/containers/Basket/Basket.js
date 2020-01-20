@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import Basket from '../../components/Basket/Basket';
 
 import {
-    clearBasket
+    clearBasket,
+    deleteBasketItem
 } from '../../actions/actions'
 
 const mapStateToProps = ({ products }) => ({
@@ -14,6 +15,7 @@ const mapStateToProps = ({ products }) => ({
 
 const mapDispatchToProps = dispatch => ({
     clearBasket: bindActionCreators(clearBasket, dispatch),
+    deleteBasketItem: bindActionCreators(deleteBasketItem, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Basket);

@@ -21,6 +21,9 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin-left: 20%;
+    margin-top: 1em;
+    font-familt: sans-serif;
+    background-color: #F4F4F4;
     @media ${device.mobileL} {
         width: 60%;
     }

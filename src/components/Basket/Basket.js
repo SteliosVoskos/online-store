@@ -99,9 +99,19 @@ const Button = styled.button`
         background-color: ${props => props.isRemoveFromBasket ? '#FA5252' : '#49728c' };
     }
 `;
+
+const CheckoutLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+`;
+
 export default class Basket extends Component {
     handleDeleteBasketItem = id => {
         this.props.deleteBasketItem(id);
+    }
+
+    handleClearbasket = () => {
+        this.props.clearBasket();
     }
 
     renderBasketItems() {
@@ -117,10 +127,6 @@ export default class Basket extends Component {
                 </BasketItem>
             );
         });
-    }
-
-    handleClearbasket = () => {
-        this.props.clearBasket();
     }
 
     render() {
@@ -142,6 +148,7 @@ export default class Basket extends Component {
                     <h3>Total: £{this.props.totalPrice.toFixed(2)}</h3>
                 </Total>
                 <Button onClick={this.props.clearBasket}>Clear basket</Button>
+                <CheckoutLink to="/checkout">Go to checkout</CheckoutLink>
             </div>
         )
     }

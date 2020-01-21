@@ -10,6 +10,7 @@ import ProductDetails from './containers/Products/ProductDetails';
 import Register from './containers/Forms/Register';
 import Login from './containers/Forms/Login';
 import Navigation from './components/Navigation/Navigation';
+import CheckoutForm from './containers/Basket/CheckoutForm';
 import store from './store';
 
 const Wrapper = styled.div`
@@ -27,6 +28,7 @@ function App() {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/basket" component={Basket} />
+            <Route path="/checkout" component={CheckoutForm} />
             <Route path="/" component={Home} />
           </Switch>
         </Wrapper>

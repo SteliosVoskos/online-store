@@ -105,3 +105,44 @@ export function deleteBasketItem(id) {
         id
     };
 }
+
+export function checkoutEmailIsChanging(email) {
+    return {
+        type: actionTypes.EMAIL_IS_CHANGING,
+        email
+    };
+}
+
+export function nameOnCardIsChanging(name) {
+    return {
+        type: actionTypes.NAME_ON_CARD_IS_CHANGING,
+        name
+    };
+}
+
+export function cardNumberIsChanging(cardNumber) {
+    return {
+        type: actionTypes.CARD_NUMBER_IS_CHANGING,
+        cardNumber
+    };
+}
+
+export function securityNumberIsChanging(securityNumber) {
+    return {
+        type: actionTypes.SECURITY_NUMBER_IS_CHANGING,
+        securityNumber
+    };
+}
+
+export function expiryDateIsChanging(expiryDate) {
+    return {
+        type: actionTypes.EXPIRY_DATE_IS_CHANGING,
+        expiryDate
+    };
+}
+
+export function submitCheckoutForm() {
+    return {
+        type: actionTypes.SUBMIT_CHECKOUT_FORM
+    };
+}

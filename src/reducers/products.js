@@ -10,7 +10,13 @@ import flatWhite from './assets/flatWhite.jpg';
 
 const initialState = {
     basket: [],
+    cardNumber: '',
+    checkoutEmail: '',
+    checkoutFormSubmitted: false,
+    expiryDate: '',
+    nameOnCard: '',
     productList: [],
+    securityNumber: '',
     selectedProduct: null,
     totalPrice: 0
 };
@@ -178,7 +184,34 @@ const products = (state = initialState, action) => {
             return Object.assign({}, state, {
                 basket: [],
                 totalPrice: 0
-            })
+            });
+        case actionType.SUBMIT_CHECKOUT_FORM:
+            return Object.assign({}, state, {
+                checkoutFormSubmitted: true
+            });
+        case actionType.SECURITY_NUMBER_IS_CHANGING:
+            return Object.assign({}, state, {
+                securityNumber: action.securityNumber
+            });
+        case actionType.CARD_NUMBER_IS_CHANGING:
+            if (action.cardNumber.length <= 16) {
+                return Object.assign({}, state, {
+                    cardNumber: action.cardNumber
+                });
+            }
+            return state;
+        case actionType.NAME_ON_CARD_IS_CHANGING:
+            return Object.assign({}, state, {
+                nameOnCard: action.name
+            });
+        case actionType.EMAIL_IS_CHANGING:
+            return Object.assign({}, state, {
+                checkoutEmail: action.email
+            });
+        case actionType.EXPIRY_DATE_IS_CHANGING:
+            return Object.assign({}, state, {
+                expiryDate: action.expiryDate
+            });
         default:
             return state;
     }

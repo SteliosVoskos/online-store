@@ -83,9 +83,8 @@ export default class CheckoutForm extends Component {
     }
 
     handleFormSubmission = () => {
-        if (this.props.cardNumber.length !== '' && this.props.checkoutEmail !== '' && this.props.nameOnCard !== '' && this.props.securityNumber.length !== '' && this.props.expiryDate !== '') {
-            this.props.submitCheckoutForm();
-        }
+        console.log(this.props);
+        this.props.submitCheckoutForm();
     }
 
     renderBasketItemDetails() {
@@ -142,24 +141,7 @@ export default class CheckoutForm extends Component {
 
     renderThankyouMessageAndForm() {
         if (this.props.checkoutFormSubmitted) {
-            if (this.props.loginFormSubmitted || this.props.loginFormSubmitted) {
-                if ((this.props.loginPassword === this.props.password) && (this.props.loginEmail === this.props.email) && this.props.firstName !== "") {
-                    return (
-                        <div>
-                            <h1>Thank you, {this.props.firstName}!</h1>
-                            <p>We received your payment of £{this.props.totalPrice.toFixed(2)} and we will deliver your items to your address</p>
-                            <p>Your order reference is #{Math.random(10)}</p>
-                        </div>
-                    )
-                } 
-            }
-            return (
-                <div>
-                    <h1>Thank you, customer!</h1>
-                    <p>We received your payment of £{this.props.totalPrice.toFixed(2)} and we will deliver your items to your address</p>
-                    <p>Your order reference is #{Math.random(10)}</p>
-                </div>
-            )
+            return <Redirect to="/thank-you" />
         }
 
         return this.renderFormFields();

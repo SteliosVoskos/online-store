@@ -22,6 +22,7 @@ const mapStateToProps = ({ forms, products }) => ({
     registerFormSubmitted: forms.registerFormSubmitted,
     basket: products.basket,
     checkoutFormSubmitted: products.checkoutFormSubmitted,
+    securityNumber: products.securityNumber,
     totalPrice: products.totalPrice
 });
 

@@ -1,5 +1,5 @@
 import * as actionType from '../actions/actionTypes';
-const initialState = {
+export const initialState = {
     firstName: '',
     surname: '',
     email: '',
@@ -41,12 +41,12 @@ const forms = (state=initialState, action) => {
         case actionType.LOGIN_EMAIL_IS_UPDATING:
             return Object.assign({}, state, {
                 loginEmail: action.loginEmail,
-                loginFormSubmitted: false,
+                loginFormSubmitted: false
             });
         case actionType.LOGIN_PASSWORD_IS_UPDATING:
             return Object.assign({}, state, {
                 loginPassword: action.loginPassword,
-                loginFormSubmitted: false,
+                loginFormSubmitted: false
             });
         case actionType.REGISTER_FORM_SUBMITTED:
             return Object.assign({}, state, {

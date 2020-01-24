@@ -69,7 +69,7 @@ export default class ProductDetails extends Component {
                 <Container>
                     <Heading>Information about {selectedProduct.title}</Heading>
                     <ProductInformation>
-                        <img src={selectedProduct.image} />
+                        <img src={selectedProduct.image} alt={selectedProduct.title}/>
                         <h2>{selectedProduct.title}</h2>
                         <p>{selectedProduct.description}</p>
                         <p>Rating {selectedProduct.rating}</p>

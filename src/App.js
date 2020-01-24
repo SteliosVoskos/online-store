@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
 
 import Basket from './containers/Basket/Basket';
 import Home from './containers/Home/Home';
@@ -14,15 +13,12 @@ import CheckoutForm from './containers/Basket/CheckoutForm';
 import ThankYou from './containers/ThankYou/ThankYou';
 import store from './store';
 
-const Wrapper = styled.div`
-`;
-
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Navigation />
-        <Wrapper>
+        <div>
           <Switch>
             <Route path="/products/:id" component={ProductDetails} />
             <Route path="/products" component={Products} />
@@ -33,7 +29,7 @@ function App() {
             <Route path="/checkout" component={CheckoutForm} />
             <Route path="/" component={Home} />
           </Switch>
-        </Wrapper>
+        </div>
       </BrowserRouter>
     </Provider>
   );

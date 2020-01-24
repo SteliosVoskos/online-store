@@ -96,8 +96,6 @@ export default class CheckoutForm extends Component {
                 </div>
             )
         });
-
-        return null;
     }
 
     renderFormFields() {

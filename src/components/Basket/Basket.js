@@ -119,7 +119,7 @@ export default class Basket extends Component {
         return basket.map(product => {
             return (
                 <BasketItem key={product.id}>
-                    <img src={product.image} />
+                    <img src={product.image} alt={product.title} />
                     <ProductInfo>{product.title}</ProductInfo>
                     <ProductInfo>{product.description}</ProductInfo>
                     <ProductInfo>£{product.isOffer ? product.newPrice.toFixed(2) : product.price.toFixed(2)}</ProductInfo>

@@ -77,6 +77,7 @@ const Featured = styled.div`
     border-radius: 2px;
     margin: 0.5em auto;
     font-size: 0.8em;
+    margin-right: 0.2em;
 `;
 
 const Vegan = styled.span`
@@ -95,10 +96,20 @@ const Image = styled.img`
         width: 70px;
         margin-top: 1em;
     }
+    @media (min-width: 1024px) {
+        margin-left: 1.3em;
+    }
 `;
 
 const Rating = styled.div`
     margin-top: 1em;
+`;
+
+const OfferContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
 `
 export default class Product extends Component {
     constructor(props) {
@@ -137,8 +148,10 @@ export default class Product extends Component {
                     </div>
                     <DescriptionContainer>
                         <Title>{title}</Title>
-                        {isFeatured && <Featured>Featured product</Featured>}
-                        {isOffer && <Offer />}
+                        <OfferContainer>
+                            {isFeatured && <Featured>Featured product</Featured>}
+                            {isOffer && <Offer />}
+                        </OfferContainer>
                         {isOffer && newPrice !== '' && <div><NewPrice>£{newPrice.toFixed(2)}</NewPrice><PreviousPrice>£{price.toFixed(2)}</PreviousPrice></div>}
                         {!isOffer && <span>Price £{price.toFixed(2)}</span>}
                         <Rating>
